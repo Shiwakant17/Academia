@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
         message: "Node.js Search Gateway Running Successfully"
     });
 });
-
+console.log("Academia Search Gateway Started");
 // Start server
 const PORT = process.env.PORT || 5000;
 
