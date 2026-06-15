@@ -1,0 +1,28 @@
+package mth.models;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "courses")
+
+public class Course {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long courseId;
+
+    @Column(unique = true)
+    private String courseCode;
+
+    private String courseName;
+
+    private Integer credits;
+
+    private Integer semester;
+
+    private String level;
+
+    @Column(length = 1000)
+    private String description;
+}

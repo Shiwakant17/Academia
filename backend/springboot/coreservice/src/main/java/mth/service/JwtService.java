@@ -1,0 +1,48 @@
+package mth.service;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+
+import javax.crypto.SecretKey;
+
+@Service
+public class JwtService {
+
+    private static final String SECRET_KEY =
+            "AcademicPlannerSecretKeyForJWTGeneration123456789";
+
+    private static final long EXPIRATION_TIME = 600000;
+
+    public String generateToken(String username) {
+
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(
+                        new Date(System.currentTimeMillis() + EXPIRATION_TIME)
+                )
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .compact();
+    }
+    public String extractUsername(String token) {
+
+        return Jwts.parser()
+                .verifyWith(getSignKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .getSubject();
+    }
+    private SecretKey getSignKey() {
+
+        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+
+        return Keys.hmacShaKeyFor(keyBytes);
+    }
+}

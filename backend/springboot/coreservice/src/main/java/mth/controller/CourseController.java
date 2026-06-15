@@ -1,0 +1,81 @@
+package mth.controller;
+
+import mth.models.Course;
+import mth.models.Role;
+import mth.models.User;
+import mth.service.CourseService;
+import org.springframework.web.bind.annotation.*;
+import mth.repository.UserRepository;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/courses")
+@CrossOrigin(origins = "*")
+public class CourseController {
+
+    private final CourseService courseService;
+    private final UserRepository userRepository;
+
+    public CourseController(CourseService courseService,
+            UserRepository userRepository) {
+
+this.courseService = courseService;
+this.userRepository = userRepository;
+}
+
+    @PostMapping
+    public Course addCourse(@RequestBody Course course) {
+        return courseService.addCourse(course);
+    }
+
+    @GetMapping
+    public List<Course> getAllCourses() {
+        return courseService.getAllCourses();
+    }
+
+    @GetMapping("/{id}")
+    public Course getCourseById(@PathVariable Long id) {
+        return courseService.getCourseById(id);
+    }
+
+    @PutMapping("/{id}")
+    public Course updateCourse(
+            @PathVariable Long id,
+            @RequestBody Course course) {
+
+        return courseService.updateCourse(id, course);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteCourse(
+            @PathVariable Long id,
+            @RequestParam String username) {
+
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (user.getRole() != Role.ADMIN) {
+            throw new RuntimeException("Only ADMIN can delete courses");
+        }
+
+        courseService.deleteCourse(id);
+
+        return "Course deleted successfully";
+    }
+    
+    @PostMapping("/add")
+    public Course addCourse(
+            @RequestBody Course course,
+            @RequestParam String username) {
+
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (user.getRole() != Role.ADMIN) {
+            throw new RuntimeException("Only ADMIN can add courses");
+        }
+
+        return courseService.addCourse(course);
+    }
+}

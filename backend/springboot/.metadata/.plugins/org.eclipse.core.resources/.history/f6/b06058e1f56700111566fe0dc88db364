@@ -1,0 +1,34 @@
+package mth.controller;
+
+import mth.models.User;
+import mth.service.AuthService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
+
+@RestController
+@RequestMapping("/auth")
+public class AuthController {
+
+    private final AuthService authService;
+
+    @PostMapping("/register")
+    public String register(@RequestBody User user) {
+        return authService.register(user);
+    }
+
+    @PostMapping("/login")
+    public Map<String,String> login(
+            @RequestBody Map<String,String> request
+    ) {
+
+        String token = authService.login(
+                request.get("username"),
+                request.get("password")
+        );
+
+        return Map.of(
+                "token", token
+        );
+    }
+}
