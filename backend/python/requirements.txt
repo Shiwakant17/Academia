@@ -1,5 +1,6 @@
 fastapi
 uvicorn
 pymongo
-
+sentence-transformers
 python-dotenv
+numpy
