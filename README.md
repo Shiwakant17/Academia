@@ -1,28 +1,121 @@
-# React + Vite
+# Academia 🎓
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A distributed academic planning and course recommendation platform built using a multi-service backend architecture.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- User Authentication
+- Course Management
+- Semester Planning
+- Search Gateway
+- Academic Recommendation Support
+- REST APIs
+- Cloud Deployment Ready
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🏗️ Tech Stack
 
-## Expanding the ESLint configuration
+### Backend
+- Java (Spring Boot)
+- Node.js
+- Python (FastAPI)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-# Academia
-
-Local Setup:
-
-Backend:
-- Spring Boot (8081)
-- Node Gateway (5000)
+### Database
 - PostgreSQL
 - MongoDB Atlas
 
-Frontend:
-npm run dev
+### Deployment
+- Render
+
+---
+
+## 📁 Project Structure
+
+```
+Academia/
+│
+├── backend/
+│   ├── java/
+│   │   ├── controller/
+│   │   ├── models/
+│   │   ├── repository/
+│   │   └── service/
+│   │
+│   ├── nodejs/
+│   │   └── server.js
+│   │
+│   └── python/
+│       ├── main.py
+│       ├── requirements.txt
+│       └── .env
+│
+├── pom.xml
+└── README.md
+```
+
+---
+
+## ⚙️ Installation
+
+Clone repository:
+
+```bash
+git clone https://github.com/YOUR_USERNAME/Academia.git
+cd Academia
+```
+
+### Java Service
+
+```bash
+mvn clean install
+mvn spring-boot:run
+```
+
+### Node Gateway
+
+```bash
+cd backend/nodejs
+npm install
+npm start
+```
+
+### Python Service
+
+```bash
+cd backend/python
+pip install -r requirements.txt
+python main.py
+```
+
+---
+
+## 🔐 Environment Variables
+
+Create `.env`
+
+Example:
+
+```env
+PORT=5000
+
+MONGO_URI=your_mongodb_connection
+
+DATABASE_NAME=academic_planning_db
+
+PYTHON_API_URL=http://localhost:8000
+```
+
+---
+
+## ☁️ Deployment
+
+Deployed using Render platform.
+
+---
+
+## 👨‍💻 Author
+
+Shiwakant Sundaram
+Shiva Yadav
+Shivam Agarwal
